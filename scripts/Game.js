@@ -1,4 +1,3 @@
-
 import { Wisp } from './Wisp.js';
 import { playClickSound, playBackgroundMusic } from "./audioHandler.js";
 import { money, updateMoney } from './data.js';

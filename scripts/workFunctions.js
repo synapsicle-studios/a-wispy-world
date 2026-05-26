@@ -10,6 +10,7 @@ const happinessImages = {
 
 async function runWorkAnimation(wisp, workStartSrc, workingSrc) {
     if (!wisp.alive) { wisp.htmlImage.src = wisp.image.dead; return false; }
+
     wisp.isMoving = false;
     wisp.htmlImage.src = wisp.image.idle;
     await wait(1000);
@@ -31,11 +32,12 @@ async function runWorkAnimation(wisp, workStartSrc, workingSrc) {
 }
 
 export async function normalWork(wisp) {
+    if(!wait) return
     const completed = await runWorkAnimation(wisp, wisp.image.workStart, wisp.image.working);
     if (completed) updateMoney(moneyAddAmount);
 }
 
 export async function happinessWork(wisp) {
     const completed = await runWorkAnimation(wisp, happinessImages.workStart, happinessImages.working);
-    if (completed) wisps.forEach(w => w.happiness += 5);
+    wisps.forEach(w => w.happiness = Math.min(100, w.happiness + 5));
 }

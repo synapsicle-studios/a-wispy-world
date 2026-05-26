@@ -136,9 +136,9 @@ export class Wisp {
         this.hunger = Math.max(0, this.hunger - this.hungerDecay);
 
         if (activeWisp === this && this.ui) {
-            this.ui.happinessMeter?.update(this.happiness);
+            this.ui.happynessMeter?.update(this.happiness);
             this.ui.hungerMeter?.update(this.hunger);
-            this.ui.thirstMeter?.update(this.thirst);
+            this.ui.thirstyMeter?.update(this.thirst);
         }
     }
 
