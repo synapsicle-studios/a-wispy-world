@@ -1,4 +1,6 @@
-# a-wispy-world
-A simple game i am  making
+# a wispy world
+## by synapsicle studios :D
+A simple game I am  making
 
-just download the html file and run it :p
+just download the HTML file and run it :p
+
