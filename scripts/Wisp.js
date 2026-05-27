@@ -73,6 +73,7 @@ export class Wisp {
             this.htmlImage.src = this.image.happy;
 
             setTimeout(() => {
+                if (!this.alive) return;
                 this.htmlImage.src = this.image.normal;
                 this.isMoving = true;
                 this.isPet = false;

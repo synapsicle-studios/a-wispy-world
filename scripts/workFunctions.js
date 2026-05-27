@@ -39,5 +39,6 @@ export async function normalWork(wisp) {
 
 export async function happinessWork(wisp) {
     const completed = await runWorkAnimation(wisp, happinessImages.workStart, happinessImages.working);
-    wisps.forEach(w => w.happiness = Math.min(100, w.happiness + 5));
+    wisps.forEach(w => w.happiness = Math.min(100, w.happiness + 10));
+    wisps.forEach((w)=>w.ui?.happynessMeter?.update(w.happiness));
 }

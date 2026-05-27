@@ -1,21 +1,90 @@
 
 export const sideMenu = document.getElementById("sideMenu");
 export let activeWisp = null;
-
+let isPopupOpen = false;
+let currentPopupOpen = null;
 export const fillBars = {
     thirst: 5,
     hunger: 5,
 };
+const closeJobPopup = () => {
+    let popup = document.getElementById('popup');
+    popup.classList.remove("show");
+    popup.innerHTML = "";
+    isPopupOpen = false;
+    currentPopupOpen = null;
+};
+const makeButtonsForJobPopup=(wisp)=>{
+    const jobButtonDiv=document.createElement("div");
+    jobButtonDiv.className = "jobButtonDiv";
+    const moneyWorkButton=document.createElement("button");
+    const happinessButton=document.createElement("button");
+
+    moneyWorkButton.textContent=`Make ${wisp.name} make Oobs`
+    happinessButton.textContent=`Make ${wisp.name} a Cheerleader`
+
+    moneyWorkButton.addEventListener("click", ()=>{
+        wisp.job="money"
+        closeJobPopup()
+    })
+    happinessButton.addEventListener("click", ()=>{
+        wisp.job="happiness"
+        closeJobPopup()
+    })
+
+    switch (wisp.job) {
+        case "happiness": happinessButton.disabled = true; break;
+        case "money": moneyWorkButton.disabled = true; break;
+    }
+    jobButtonDiv.append(moneyWorkButton, happinessButton);
+    return jobButtonDiv;
+}
+const parseJobName=(job)=>{
+    if(job==="money") return "Making Oobs"
+    if(job==="happiness") return "Cheerleader"
+}
+const makeNavAreaForPopup=(wisp)=>{
+    const nav=document.createElement("nav")
+
+    const name=document.createElement('h2');
+    name.textContent=wisp.name;
+
+    const currentJob=document.createElement('span');
+    currentJob.textContent=parseJobName(wisp.job);
+
+    const xButton=document.createElement("span");
+    xButton.className= "xButton";
+    xButton.textContent="x";
+    xButton.addEventListener("click",()=>{
+        closeJobPopup();
+    })
+
+    nav.append(name,currentJob,xButton);
+    return nav
+}
 const makeJobPopup=(wisp)=>{
+    isPopupOpen=true;
+
     let popup=document.getElementById('popup');
-    popup.style.display="show";
+    popup.innerHTML = "";
+    popup.classList.add("show")
+
+    const popupArea=document.createElement('div');
+    popupArea.classList.add("popupArea");
+
+    const navArea=makeNavAreaForPopup(wisp)
+    const buttons=makeButtonsForJobPopup(wisp);
+    popupArea.appendChild(navArea);
+    popupArea.appendChild(buttons)
+    popup.appendChild(popupArea);
+
+    currentPopupOpen=popup;
 }
 export const makeProgressBar = (name, value) => {
     const mainDiv = document.createElement("div");
     const span = document.createElement("span");
     const progressBarOut = document.createElement("div");
     const progressBarInner = document.createElement("div");
-
     mainDiv.className = "progress-bar";
     progressBarOut.className = "progressBarOut";
     progressBarInner.className = "progressBarInner";
@@ -46,7 +115,7 @@ export const loadButtonDiv = (wisp) => {
     feedButton.addEventListener('click', () => {
         wisp.hunger = Math.min(wisp.hunger + fillBars.hunger, 100);
         if (activeWisp === wisp && wisp.ui) {
-            wisp.ui.happynessMeter.update(wisp.happyness);
+            wisp.ui.happynessMeter.update(wisp.happiness);
             wisp.ui.hungerMeter.update(wisp.hunger);
             wisp.ui.thirstyMeter.update(wisp.thirst);
         }
@@ -55,7 +124,7 @@ export const loadButtonDiv = (wisp) => {
     drinkButton.addEventListener('click', () => {
         wisp.thirst = Math.min(wisp.thirst + fillBars.thirst, 100);
         if (activeWisp === wisp && wisp.ui) {
-            wisp.ui.happynessMeter.update(wisp.happyness);
+            wisp.ui.happynessMeter.update(wisp.happiness);
             wisp.ui.hungerMeter.update(wisp.hunger);
             wisp.ui.thirstyMeter.update(wisp.thirst);
         }
@@ -93,7 +162,7 @@ export const loadRightClickMenu = (wisp) => {
     displayTraits.textContent =
         `${wisp.name} is ${wisp.traits[0]}, ${wisp.traits[1]}, and ${wisp.traits[2]}.`;
 
-    const happynessMeter = makeProgressBar('Happiness', wisp.happyness);
+    const happynessMeter = makeProgressBar('Happiness', wisp.happiness);
     const hungerMeter = makeProgressBar('Hunger', wisp.hunger);
     const thirstyMeter = makeProgressBar('Thirsty', wisp.thirst);
 
@@ -101,6 +170,10 @@ export const loadRightClickMenu = (wisp) => {
 
     let buttonDiv = loadButtonDiv(wisp);
 
+    const assignJobButton=document.createElement('button');
+    assignJobButton.textContent = `Assign ${wisp.name} a job`;
+    assignJobButton.addEventListener('click', () => makeJobPopup(wisp));
+    assignJobButton.style.margin="1%"
     nameHeader.addEventListener('click', () => {
         const newName = prompt(`What should ${wisp.name}'s name be?`);
         if (newName) {
@@ -118,7 +191,7 @@ export const loadRightClickMenu = (wisp) => {
     });
 
     sideMenu.append(nameHeader, displayTraits, showGender, showSexuality,
-        happynessMeter, hungerMeter, thirstyMeter, buttonDiv);
+        happynessMeter, hungerMeter, thirstyMeter, buttonDiv, assignJobButton);
 };
 
 export const initPenClickListener = () => {
@@ -133,3 +206,14 @@ export const initPenClickListener = () => {
         }
     });
 }
+document.addEventListener('keydown', (e) => {
+    if(!isPopupOpen) return
+    let key=e.key;
+    if(key==='Escape'){
+        currentPopupOpen.classList.remove('show');
+        currentPopupOpen.innerHTML="";
+        currentPopupOpen=null
+        isPopupOpen=false;
+    }
+
+})

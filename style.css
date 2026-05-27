@@ -192,14 +192,16 @@ menu {
     transition: transform 0.1s linear;
 }
 .popup{
-    display: flex;
+    width: 100vw;
+    height: 100vh;
+    display: none;
     align-items: center;
     justify-content: center;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 10000;
-    background-color: rgb(36 0 31 / 0.39);
+    background-color: rgb(0 0 0 / 0.25);
 }
 main{
     width: 100vw;
@@ -208,4 +210,38 @@ main{
     position: absolute;
     top: 0;
     left: 0;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px;
+    background-color: #ffe0ea;
+    border: #df4b7b solid 3px;
+}
+nav>img,h2{
+    margin: 5px 5px;
+}
+.show{
+    display: flex;
+}
+.popupArea{
+    padding: 12px;
+    border: #df4b7b solid 5px;
+    border-radius: 50px;
+    width: 25%;
+    height: 50%;
+    background-color: #d994ab;
+}
+.xButton{
+    font-size: 30px;
+    margin: 2px 5px;
+}
+.jobButtonDiv{
+    margin: 1%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: flex-start;
 }
