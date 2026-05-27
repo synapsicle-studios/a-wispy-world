@@ -79,8 +79,7 @@ function buyWisp() {
     init();
 }
 
-init();
-initPenClickListener();
+
 
 document.getElementById("buyAWisp").addEventListener('click', buyWisp);
 
@@ -90,4 +89,9 @@ document.addEventListener('keydown', (event) => {
         init();
     }
 });
-document.addEventListener('DOMContentLoaded', () => playBackgroundMusic());
+document.addEventListener('DOMContentLoaded', () => {
+    playBackgroundMusic()
+    initPenClickListener();
+    init();
+
+});

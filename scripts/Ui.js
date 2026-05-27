@@ -6,7 +6,10 @@ export const fillBars = {
     thirst: 5,
     hunger: 5,
 };
-
+const makeJobPopup=(wisp)=>{
+    let popup=document.getElementById('popup');
+    popup.style.display="show";
+}
 export const makeProgressBar = (name, value) => {
     const mainDiv = document.createElement("div");
     const span = document.createElement("span");

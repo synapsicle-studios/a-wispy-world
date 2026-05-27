@@ -1,6 +1,6 @@
-
+import './scripts/workFunctions.js'
 import './scripts/data.js';
-import './scripts/ui.js';
-import './scripts/wisp.js';
-import './scripts/game.js';
+import './scripts/Ui.js';
+import './scripts/Wisp.js';
+import './scripts/Game.js';
 import './scripts/audioHandler.js';

@@ -47,6 +47,8 @@ export class Wisp {
     }
 
     init() {
+        console.trace("init called");
+        if (this.isRendered) return;
         this.pen = document.getElementById('pen');
         this.htmlImage = document.createElement('img');
         this.htmlImage.src = this.image.normal;
@@ -67,7 +69,7 @@ export class Wisp {
             this.isMoving = false;
 
             this.happiness = Math.min(100, this.happiness + PET_HAPPINESS_BONUS);
-            this.ui?.happinessMeter?.update(this.happiness);
+            this.ui?.happynessMeter?.update(this.happiness);
             this.htmlImage.src = this.image.happy;
 
             setTimeout(() => {
@@ -166,6 +168,7 @@ export class Wisp {
     }
 
     render() {
+        this.isRendered=true;
         if (this.htmlImage) {
             this.htmlImage.style.left = `${this.x}px`;
             this.htmlImage.style.top = `${this.y}px`;

@@ -191,3 +191,21 @@ menu {
     animation: width-pulse 3s ease-in-out infinite;
     transition: transform 0.1s linear;
 }
+.popup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10000;
+    background-color: rgb(36 0 31 / 0.39);
+}
+main{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
