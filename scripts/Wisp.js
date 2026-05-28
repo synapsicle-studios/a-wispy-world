@@ -2,7 +2,7 @@
 import { names, traits, greenWispImagePath } from './data.js';
 import { activeWisp, loadRightClickMenu } from './Ui.js';
 import { playDeathSound } from "./audioHandler.js";
-import { normalWork, happinessWork } from "./workFunctions.js";
+import { normalWork, happinessWork,feedAllWisps } from "./workFunctions.js";
 
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -11,6 +11,7 @@ export const PET_HAPPINESS_BONUS = 1;
 const jobHandlers = {
     money: normalWork,
     happiness: happinessWork,
+    food:  feedAllWisps,
 };
 
 export class Wisp {

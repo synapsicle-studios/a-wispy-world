@@ -7,7 +7,10 @@ const happinessImages = {
     workStart: './images/work-images/happy-work-start.png',
     working: './images/work-images/happy-working.png',
 };
-
+const foodGuyImages = {
+    workStart: './images/work-images/hunger-working-start.png',
+    working: './images/work-images/hunger-working.png',
+}
 async function runWorkAnimation(wisp, workStartSrc, workingSrc) {
     if (!wisp.alive) { wisp.htmlImage.src = wisp.image.dead; return false; }
 
@@ -41,4 +44,11 @@ export async function happinessWork(wisp) {
     const completed = await runWorkAnimation(wisp, happinessImages.workStart, happinessImages.working);
     wisps.forEach(w => w.happiness = Math.min(100, w.happiness + 10));
     wisps.forEach((w)=>w.ui?.happynessMeter?.update(w.happiness));
+}
+export async function feedAllWisps(wisp){
+    const completed = await runWorkAnimation(wisp, foodGuyImages.workStart, foodGuyImages.workStart);
+    if(completed){
+        wisps.forEach(w => w.hunger = Math.min(100, w.hunger + 20));
+        wisps.forEach((w)=>w.ui?.hungerMeter?.update(w.hunger));
+    }
 }

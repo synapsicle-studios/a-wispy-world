@@ -17,11 +17,15 @@ const closeJobPopup = () => {
 const makeButtonsForJobPopup=(wisp)=>{
     const jobButtonDiv=document.createElement("div");
     jobButtonDiv.className = "jobButtonDiv";
+
     const moneyWorkButton=document.createElement("button");
     const happinessButton=document.createElement("button");
+    const foodButton=document.createElement("button");
 
+    foodButton.textContent = `Make ${wisp.name} a Wisp Food Seller`
     moneyWorkButton.textContent=`Make ${wisp.name} make Oobs`
     happinessButton.textContent=`Make ${wisp.name} a Cheerleader`
+
 
     moneyWorkButton.addEventListener("click", ()=>{
         wisp.job="money"
@@ -31,17 +35,22 @@ const makeButtonsForJobPopup=(wisp)=>{
         wisp.job="happiness"
         closeJobPopup()
     })
-
+    foodButton.addEventListener("click", ()=>{
+        wisp.job="food"
+        closeJobPopup()
+    });
     switch (wisp.job) {
         case "happiness": happinessButton.disabled = true; break;
         case "money": moneyWorkButton.disabled = true; break;
+        case "food": foodButton.disabled = true; break;
     }
-    jobButtonDiv.append(moneyWorkButton, happinessButton);
+    jobButtonDiv.append(moneyWorkButton, happinessButton, foodButton);
     return jobButtonDiv;
 }
 const parseJobName=(job)=>{
     if(job==="money") return "Making Oobs"
     if(job==="happiness") return "Cheerleader"
+    if(job==="food") return "Wisp Food Seller"
 }
 const makeNavAreaForPopup=(wisp)=>{
     const nav=document.createElement("nav")
