@@ -30,14 +30,14 @@ export const names = [
 
 export const traits = [
     "brave", "cowardly", "ugly", "Stupid", "Chronicly stupid", "a Plain Chicken lover",
-    "Homophobic", "Transphobic", "intelligent", "Ragebaiter", "reckless", "charismatic",
+    "intelligent", "Ragebaiter", "reckless", "charismatic",
     "introverted", "extroverted", "loyal", "racist", "deceptive", "curious", "lazy",
     "ambitious", "greedy", "generous", "strategic", "impulsive", "patient", "aggressive",
     "calm", "optimistic", "pessimistic", "sarcastic", "honest", "manipulative", "fearless",
     "nervous", "creative", "logical", "stubborn", "adaptable", "resourceful", "clumsy",
     "focused", "distractible", "friendly", "hostile", "confident", "insecure", "disciplined",
     "rebellious", "empathetic", "cold", "witty", "serious", "cautious", "playful",
-    "resilient", "fragile", "leader", "follower"
+    "resilient", "fragile", "leader", "follower", "witchy", "silly", "suspicious", "cheerful", "cynical", "vain", "humble", "careless"
 ];
 
 export const greenWispImagePath = {
