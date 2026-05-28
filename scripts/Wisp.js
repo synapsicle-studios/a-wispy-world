@@ -171,6 +171,7 @@ export class Wisp {
 
     render() {
         this.isRendered=true;
+
         if (this.htmlImage) {
             this.htmlImage.style.left = `${this.x}px`;
             this.htmlImage.style.top = `${this.y}px`;
@@ -182,6 +183,7 @@ export class Wisp {
     }
 
     move() {
+        this.htmlImage.src = this.image.normal;
         if (!this.alive || !this.isMoving || !this.htmlImage) return;
 
         const rect = this.htmlImage.getBoundingClientRect();

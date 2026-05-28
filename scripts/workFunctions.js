@@ -46,7 +46,7 @@ export async function happinessWork(wisp) {
     wisps.forEach((w)=>w.ui?.happynessMeter?.update(w.happiness));
 }
 export async function feedAllWisps(wisp){
-    const completed = await runWorkAnimation(wisp, foodGuyImages.workStart, foodGuyImages.workStart);
+    const completed = await runWorkAnimation(wisp, foodGuyImages.workStart, foodGuyImages.working);
     if(completed){
         wisps.forEach(w => w.hunger = Math.min(100, w.hunger + 20));
         wisps.forEach((w)=>w.ui?.hungerMeter?.update(w.hunger));
